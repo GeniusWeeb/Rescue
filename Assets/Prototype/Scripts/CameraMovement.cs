@@ -23,12 +23,14 @@ public class CameraMovement : MonoBehaviour
 
 
     [SerializeField] private GameObject cameraFollowThis;
-    
+
+
+    public Vector2 CameraMove() => new Vector2(mouseX, mouseY);
     
     private void Awake()
     {
         controls = new GameControls();
-        Cursor.lockState = CursorLockMode.Locked;
+     //   Cursor.lockState = CursorLockMode.Locked;
     }
 
 
@@ -42,14 +44,12 @@ public class CameraMovement : MonoBehaviour
         mouseLook  = controls.Player.Look.ReadValue<Vector2>();
         mouseX = mouseLook.x * Time.deltaTime * mouseSensitivity; 
         mouseY = mouseLook.y * Time.deltaTime * mouseSensitivity;
-
-
-         rotationX -= mouseY;  //Remove every y aspect from X
-         rotationY -= mouseX;  // Remove every x asepct form Y
-        rotationX = Mathf.Clamp(rotationX, -45f, 45f);  
-        rotationY = Mathf.Clamp(rotationY, -45f, 45f);  
+        rotationX -= mouseY;  //Remove every y aspect from X
+        rotationY -= mouseX;  // Remove every x asepct form Y
+        rotationX = Mathf.Clamp(rotationX, -180f, 180f);  
+       // rotationY = Mathf.Clamp(rotationY, -90f, 90f);  
         this.transform.localRotation = Quaternion.Euler(rotationX, -rotationY , 0);
-  //  this.transform.Rotate(Vector3.up * mouseX);
+
 
     }
 
@@ -57,6 +57,7 @@ public class CameraMovement : MonoBehaviour
     {
 
         this.transform.position = cameraFollowThis.transform.position + cameraOffsetValue;
+        
     }
 
 
