@@ -10,8 +10,7 @@ public class PlayerView : MonoBehaviour
     
     private void OnDrawGizmos()
     {
-        Gizmos.color =  Color.red;
-        Gizmos.DrawRay(this.transform.position * playerViewDetectDistance, transform.forward);
+      
    
     }
 }

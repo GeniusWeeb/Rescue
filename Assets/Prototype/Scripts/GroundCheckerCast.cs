@@ -46,7 +46,8 @@ public class GroundCheckerCast : MonoBehaviour
         Gizmos.color = Color.red;  
         Gizmos.DrawRay(this.transform.position,-transform.up );
         Gizmos.DrawWireCube(this.transform.position , this.transform.localScale/2);
-    
+        Gizmos.color =  Color.yellow;
+        Gizmos.DrawRay(this.transform.position , transform.forward * 10f);
          
         if (detect)
         {
