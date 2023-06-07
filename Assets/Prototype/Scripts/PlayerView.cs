@@ -12,5 +12,6 @@ public class PlayerView : MonoBehaviour
     {
         Gizmos.color =  Color.red;
         Gizmos.DrawRay(this.transform.position * playerViewDetectDistance, transform.forward);
+   
     }
 }

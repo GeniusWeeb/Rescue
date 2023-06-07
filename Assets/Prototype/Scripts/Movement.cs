@@ -49,7 +49,7 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {
-            PlayerRotate(); 
+           
            ApplyGravityIfNotGrounded();
         
     }
@@ -58,7 +58,7 @@ public class Movement : MonoBehaviour
     private void FixedUpdate()
     {
       MovePerFrame();   
-     
+      PlayerRotate(); 
     }
 
 
@@ -72,8 +72,9 @@ public class Movement : MonoBehaviour
     void MovePerFrame()
     {
         move = control.Player.Movement.ReadValue<Vector2>();
-        if (move == Vector2.zero || !cast.CheckGrounded()) return; 
-        Vector3 movement = (move.y * cameraControl.transform.forward) + (move.x * cameraControl.transform.right) ;
+        if (move == Vector2.zero || !cast.CheckGrounded()) return;
+        
+        Vector3 movement = (move.y * this.transform.forward) + (move.x * this.transform.right) ;
         body.MovePosition( transform.position + movement * moveSpeed * Time.fixedDeltaTime  );
     }
 
