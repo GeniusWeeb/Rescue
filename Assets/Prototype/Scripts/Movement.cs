@@ -75,7 +75,8 @@ public class Movement : MonoBehaviour
         if (move == Vector2.zero || !cast.CheckGrounded()) return;
         
         Vector3 movement = (move.y * this.transform.forward) + (move.x * this.transform.right) ;
-        body.MovePosition( transform.position + movement * moveSpeed * Time.fixedDeltaTime  );
+        body.MovePosition( transform.position  +  movement * (moveSpeed * Time.fixedDeltaTime)  );
+        
     }
 
 
