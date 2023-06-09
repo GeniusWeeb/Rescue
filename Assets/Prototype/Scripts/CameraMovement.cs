@@ -1,11 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using TreeEditor;
-using UnityEngine;
-using UnityEngine.InputSystem;
 
+using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     
