@@ -1,6 +1,6 @@
 
 using System.Collections;
-
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,11 +9,7 @@ using UnityEngine.InputSystem;
 public class Movement : MonoBehaviour
 {
 
-    private GameControls control; 
-    private PlayerInput playerInput;
-    
-    
-    [SerializeField] private Vector2 move;
+    [SerializeField] private Vector2 localMove;
     private Rigidbody body;
     [SerializeField] private float moveSpeed ;
     [SerializeField] private GroundCheckerCast cast;
@@ -33,34 +29,14 @@ public class Movement : MonoBehaviour
     [SerializeField] private Vector3 jumpHeight;
     [SerializeField] private float gravitySpeed;
     [SerializeField] private bool canJump;
-
-
-
-
-    private void OnEnable()
-    {
-        control.Enable();
-        
-    }
-
-    private void OnDisable()
-    {
-        control.Disable();
-    }
-
+    
+ 
 
     private void Awake()    
     {
-        control = new GameControls();
-      
+        
         body = this.GetComponent<Rigidbody>();
-        control.Player.Jump.performed += PerformJump;
-        control.Player.Jump.canceled += PerformJump;
-        control.Player.Sprint.performed += SprintPerformed; 
-        control.Player.Sprint.canceled += SprintPerformed; 
-        
-        
-
+     
     }
 
     private void Update()
@@ -84,7 +60,7 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        MovePerFrame();
+       
         if (canJump) Jump();
     }
 
@@ -93,47 +69,37 @@ public class Movement : MonoBehaviour
         if (movement == Vector3.zero) return;
         Quaternion targetRotation = Quaternion.LookRotation(movement, Vector3.up);
         
-        var finalRot = Quaternion.Slerp(transform.rotation, targetRotation, turnRate * Time.deltaTime);
+        this.transform.rotation  = Quaternion.SlerpUnclamped(transform.rotation, targetRotation, turnRate * Time.deltaTime);
         
-        if(isMoving) this.transform.rotation = finalRot;
+       //  this.transform.rotation = finalRot;
     }
-         
-    
 
- 
- 
-    void MovePerFrame()
+
+
+
+      
+    public void MovePerFrame(Vector2 tempMove)
     {
-        move = control.Player.Movement.ReadValue<Vector2>();
-        if (move == Vector2.zero || move.y == -1  ||   !cast.CheckGrounded())
-        {
-            isMoving = false;
-            return; }
-        
-        movement = (move.y * this.transform.forward) + (move.x * this.transform.right) ;
+        localMove = tempMove;
         isMoving = true;
-       
+        movement = (tempMove.y * this.transform.forward) + (tempMove.x * this.transform.right) ;
+      
         body.MovePosition(transform.position + movement * (moveSpeed * Time.fixedDeltaTime));
         
-        
         // Rotate towards the movement direction
-    
- 
     }
-
-
+    
     void ApplyGravityIfNotGrounded()
     {
         if (!cast.CheckGrounded())
         {
-          
             body.MovePosition(transform.position  +  Vector3.down  * (gravitySpeed   *  Time.deltaTime ) );
         }
         
     }
 
 
-    void PerformJump(InputAction.CallbackContext context)
+  public   void PerformJump(InputAction.CallbackContext context)
     {
         if (context.performed )
         {
@@ -165,7 +131,7 @@ public class Movement : MonoBehaviour
     }
   
 
-    void SprintPerformed(InputAction.CallbackContext context)
+  public void PerformSprint(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
@@ -173,13 +139,19 @@ public class Movement : MonoBehaviour
         }
         else if (context.canceled)
         {
-            playerAnimator.SetBool("SetRun", false);
+            playerAnimator.SetBool( "SetRun", false);
 
         }
 
     }
 
 
+    public Vector3 SetMovement(Vector3 tempMovement) => movement =  tempMovement;
+
+    public bool GetIsGrounded() => cast.CheckGrounded(); 
     //this can be moved to the grounded part of a statemachine like idle or whatever
- 
+    public bool SetIsMoving(bool status) => isMoving = status;
+
+   
+
 }
