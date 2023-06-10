@@ -33,7 +33,7 @@ public class PlayerManager : MonoBehaviour
     
 
     private Vector2 playerMovementWorldToScreen;
-    private Rigidbody playerBody;
+    private CharacterController playerController;
     private Vector3 internalMovement, movement; //similar to 22  
 
     //use this to get ref
@@ -43,7 +43,7 @@ public class PlayerManager : MonoBehaviour
     {
         Instance = this;
       
-        playerBody = GetComponent<Rigidbody>();
+        playerController = GetComponent<CharacterController>();
         cast = GetComponentInChildren<GroundCheckerCast>();
 
     }
@@ -87,9 +87,9 @@ public class PlayerManager : MonoBehaviour
     {
         movement = (playerMovementWorldToScreen.y * this.transform.forward) +
                    (playerMovementWorldToScreen.x * this.transform.right);
-        playerBody.MovePosition(transform.position +
-                                movement * (playerMovementSO.moveSpeed * playerMovementSO.sprintSpeed *
-                                            Time.fixedDeltaTime));
+        playerController.Move(movement * (playerMovementSO.moveSpeed * playerMovementSO.sprintSpeed *
+                                          Time.fixedDeltaTime));
+                                         
 
     }
 
@@ -97,8 +97,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (!cast.CheckGrounded())
         {
-            playerBody.MovePosition(transform.position +
-                                    Vector3.down * (playerMovementSO.fallDownSpeed * Time.deltaTime));
+            playerController.Move(Vector3.down * (playerMovementSO.fallDownSpeed * Time.deltaTime));
         }
 
     }

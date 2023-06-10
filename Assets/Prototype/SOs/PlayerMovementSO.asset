@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerMovementSO
   m_EditorClassIdentifier: 
   moveSpeed: 10.2
-  fallDownSpeed: 10.2
+  fallDownSpeed: 5.5
   turnRate: 3.6
   jumpHeight: {x: 0, y: 10, z: 0}
   jumpSpeed: 14.3
