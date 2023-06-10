@@ -6,10 +6,9 @@ using UnityEngine.InputSystem;
 
 namespace  Rescue.InputManagers
 {
-
-
     public class InputManager : MonoBehaviour
     {
+        public static InputManager Instance;
         
         private GameControls controls;
         private PlayerManager player;
@@ -34,34 +33,39 @@ namespace  Rescue.InputManagers
 
         private void Awake()
         {
+            Instance = this;
             controls = new GameControls();
             player = PlayerManager.Instance;
             //Subscribe to the diff actions from the input class
 
         }
 
-        private void FixedUpdate()
+         public  void CheckAndUpdateInput()
         {
-            Vector2 move = controls.Player.Movement.ReadValue<Vector2>();
-            if (move == Vector2.zero || move.y == -1 || !player.GetMovement().GetIsGrounded())
+            Vector2 move = GetControls().Player.Movement.ReadValue<Vector2>();
+           
+            if (move == Vector2.zero || move.y == -1 || !PlayerManager.Instance.CheckIfPlayerGrounded)
             {
-                player.GetMovement().SetIsMoving(false);
+                PlayerManager.Instance.SetPlayerIsMoving(false);
                 return;
             }
-
-            player.GetMovement().MovePerFrame(move);
-
+            PlayerManager.Instance.SetPlayerIsMoving(true);
+            PlayerManager.Instance.SetPlayerTempMovement(move);
+            
         }
 
         private void SprintPerforming(InputAction.CallbackContext context)
         {
-            player.GetMovement().PerformSprint(context);
+            PlayerManager.Instance.PerformSprint(context);
         }
 
         private void JumpPerforming(InputAction.CallbackContext context)
         {
-            player.GetMovement().PerformJump(context);
+            PlayerManager.Instance.PerformJump(context);
         }
+
+        public GameControls GetControls() => controls;
+        public PlayerManager GetPlayer() => player;
 
     }
 

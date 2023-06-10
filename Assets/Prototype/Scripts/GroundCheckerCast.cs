@@ -36,6 +36,7 @@ public class GroundCheckerCast : MonoBehaviour
     }
     
     public bool CheckGrounded() => isGrounded;
+    public void ForceSetGroundedTrue(bool status) => isGrounded = status;
 
 
     private void OnDrawGizmos()
