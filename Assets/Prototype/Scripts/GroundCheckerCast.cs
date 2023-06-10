@@ -1,4 +1,5 @@
 
+using Rescue.CharacterFSM;
 using UnityEngine;
 
 
@@ -24,10 +25,8 @@ public class GroundCheckerCast : MonoBehaviour
          -transform.up,  out hit, transform.rotation , maxDistance     ,layerGround);
      if (detect)
      {
-         
          isGrounded = true;
-
-
+         PlayerManager.Instance.SetPlayerSecondaryState(CharacterSecondaryState.Grounded);
      }
      else
      {

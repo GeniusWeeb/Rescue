@@ -153,6 +153,7 @@ public class PlayerManager : MonoBehaviour
                 //Main Jump perform here
               private  void PlayerPerformJump()
               {
+                  playerController.Move(new Vector3(0, 0.5f, 0) * (playerMovementSO.jumpSpeed * Time.deltaTime));
               }
 
                 IEnumerator delay()

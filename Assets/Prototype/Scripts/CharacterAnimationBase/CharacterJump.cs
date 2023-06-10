@@ -29,10 +29,11 @@ namespace  Rescue.CharacterFSM
         }
 
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-        {
+        {   
+            
             PlayerManager.Instance.SetPlayerSecondaryState(PlayerManager.Instance.CheckIfPlayerGrounded ? CharacterSecondaryState.Grounded : CharacterSecondaryState.AirBound);
+            PlayerManager.Instance.SetJumpStatus(false);
 
-           
         }
 
 

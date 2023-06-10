@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50a581f000d124aae9fd0b2d5c9d1ce4, type: 3}
   m_Name: PlayerMovementSO
   m_EditorClassIdentifier: 
-  moveSpeed: 10.2
-  fallDownSpeed: 5.5
+  moveSpeed: 1.8
+  fallDownSpeed: 2.2
   turnRate: 3.6
   jumpHeight: {x: 0, y: 10, z: 0}
-  jumpSpeed: 14.3
+  jumpSpeed: 3.6
   sprintSpeed: 1
   sprintStamina: 0
   deathAnimation: {fileID: 0}

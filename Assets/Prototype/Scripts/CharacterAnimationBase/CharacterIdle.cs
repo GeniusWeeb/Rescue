@@ -12,7 +12,8 @@ namespace Rescue.CharacterFSM
 
         private CharacterState thisState = CharacterState.Idle; 
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-        {
+        {   
+            
             PlayerManager.Instance.SetPlayerState(thisState);
             PlayerManager.Instance.SetPlayerIsMoving(false);
      
