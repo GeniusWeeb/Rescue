@@ -1,6 +1,7 @@
 using System;
 using Rescue.CharacterFSM;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 
 public class PlayerManager : MonoBehaviour
@@ -37,10 +38,13 @@ public class PlayerManager : MonoBehaviour
      }
 
      public Movement GetMovement() => playerMovement;
+     public PlayerSO GetPlayerDataSO => playerMovementSO;
 
      public void SetPlayerTempMovement(Vector2 tempMove) => playerMovementWorldToScreen = tempMove;
      public void SetPlayerState(CharacterState newState) => playerState = newState;
-     public void SetPlayerIsMoving(bool status) => isMoving = status;     
+     public void SetPlayerIsMoving(bool status) => isMoving = status;    
+     
+     
      #region Update and Fixed Update for player movement
 
              private void Update()
@@ -63,15 +67,14 @@ public class PlayerManager : MonoBehaviour
 
      private void PlayerMove()
      {
-          movement = (playerMovementWorldToScreen.y * this.transform.forward) + (playerMovementWorldToScreen.x * this.transform.right);
-         playerBody.MovePosition(transform.position + movement * (playerMovementSO.moveSpeed * Time.fixedDeltaTime));
+         movement = (playerMovementWorldToScreen.y * this.transform.forward) + (playerMovementWorldToScreen.x * this.transform.right);
+         playerBody.MovePosition(transform.position + movement * (playerMovementSO.moveSpeed * playerMovementSO.sprintSpeed * Time.fixedDeltaTime));
        
      }
-     public void HandleRotation()
-     {      
-        
-         if (movement == Vector3.zero) return;
 
+     private void HandleRotation()
+     {
+         if (movement == Vector3.zero) return;
          Vector3 tempVec;
          tempVec.x = movement.x;
          tempVec.y = 0f;
@@ -81,7 +84,19 @@ public class PlayerManager : MonoBehaviour
          if(isMoving)
           this.transform.rotation = (Quaternion.SlerpUnclamped(transform.rotation, targetRotation, playerMovementSO.turnRate * Time.deltaTime));}
 
-         //  this.transform.rotation = finalRot;
+     public void PerformSprint(InputAction.CallbackContext context)
+     {
+         if (context.performed)
+         {
+             playerAnimator.SetBool("SetRun", true);
+         }
+         else if (context.canceled)
+         {
+             playerAnimator.SetBool( "SetRun", false);
+
+         }
+
+     }
     
 
 

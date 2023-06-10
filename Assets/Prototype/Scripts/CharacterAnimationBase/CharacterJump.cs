@@ -1,18 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
-public class CharacterJump : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
+namespace  Rescue.CharacterFSM
+{ 
+    public class CharacterJump : CharacterBase
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private void OnEnable()
+        {
+            
+        }
     }
 }

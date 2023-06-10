@@ -12,6 +12,8 @@ public class PlayerSO : ScriptableObject
     public Vector3 jumpHeight;
     [Range(0, 100)] public float jumpSpeed;
     [Range(0, 100)] public float sprintSpeed;
+    [Range(0, 100)] public float sprintStamina;
+    
 
     [Header("Player Death animation")] //gameobejct or addresbales
     public GameObject deathAnimation;

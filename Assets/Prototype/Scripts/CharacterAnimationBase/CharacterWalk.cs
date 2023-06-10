@@ -7,7 +7,7 @@ namespace Rescue.CharacterFSM
 {
 
 
-    public class CharacterWalk : CharacterBase
+    public class CharacterWalk : CharacterBase                     
     {
 
         
@@ -32,7 +32,7 @@ namespace Rescue.CharacterFSM
 
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-           
+           Debug.Log("Exiting walk");
         }
         
     

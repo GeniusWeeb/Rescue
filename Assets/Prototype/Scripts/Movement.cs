@@ -116,19 +116,7 @@ public class Movement : MonoBehaviour
     }
   
 
-  public void PerformSprint(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            playerAnimator.SetBool("SetRun", true);
-        }
-        else if (context.canceled)
-        {
-            playerAnimator.SetBool( "SetRun", false);
-
-        }
-
-    }
+ 
 
 
     public Vector3 SetMovement(Vector3 tempMovement) => movement =  tempMovement;

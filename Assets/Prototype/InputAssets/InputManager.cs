@@ -56,15 +56,15 @@ namespace  Rescue.InputManagers
 
         private void SprintPerforming(InputAction.CallbackContext context)
         {
-            player.GetMovement().PerformSprint(context);
+            PlayerManager.Instance.PerformSprint(context);
         }
 
         private void JumpPerforming(InputAction.CallbackContext context)
         {
-            player.GetMovement().PerformJump(context);
+      
         }
 
-        private GameControls GetControls() => controls;
+        public GameControls GetControls() => controls;
         public PlayerManager GetPlayer() => player;
 
     }
