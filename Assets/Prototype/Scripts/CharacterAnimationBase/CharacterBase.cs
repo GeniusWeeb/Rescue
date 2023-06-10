@@ -31,6 +31,13 @@ namespace Rescue.CharacterFSM
 
     public enum CharacterState
     {
-        Idle,Walking,Running,Jumping
+        Idle,Walking,Running,Jumping,Swimming,HoldingWeapon
+    }
+
+    public enum CharacterSecondaryState
+    {
+        AirBound ,
+        Grounded,
+        InWater
     }
 }

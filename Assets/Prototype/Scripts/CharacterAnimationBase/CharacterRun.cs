@@ -1,9 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using Rescue.InputManagers;
 using UnityEngine;
-using UnityEngine.InputSystem;
+
 
 namespace Rescue.CharacterFSM
 {
@@ -27,9 +25,6 @@ namespace Rescue.CharacterFSM
         {
          
             InputManager.Instance.CheckAndUpdateInput();
-           
-
-
         }
 
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

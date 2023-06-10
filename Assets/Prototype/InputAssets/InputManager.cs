@@ -44,7 +44,7 @@ namespace  Rescue.InputManagers
         {
             Vector2 move = GetControls().Player.Movement.ReadValue<Vector2>();
            
-            if (move == Vector2.zero || move.y == -1 || !PlayerManager.Instance.GetMovement().GetIsGrounded)
+            if (move == Vector2.zero || move.y == -1 || !PlayerManager.Instance.CheckIfPlayerGrounded)
             {
                 PlayerManager.Instance.SetPlayerIsMoving(false);
                 return;
@@ -61,7 +61,7 @@ namespace  Rescue.InputManagers
 
         private void JumpPerforming(InputAction.CallbackContext context)
         {
-      
+            PlayerManager.Instance.PerformJump(context);
         }
 
         public GameControls GetControls() => controls;

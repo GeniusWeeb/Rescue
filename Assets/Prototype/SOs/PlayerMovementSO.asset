@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10.2
   fallDownSpeed: 10.2
-  turnRate: 8.9
-  jumpHeight: {x: 0, y: 1, z: 0}
-  jumpSpeed: 13.4
-  sprintSpeed: 21.4
+  turnRate: 3.6
+  jumpHeight: {x: 0, y: 10, z: 0}
+  jumpSpeed: 14.3
+  sprintSpeed: 1
+  sprintStamina: 0
   deathAnimation: {fileID: 0}

@@ -135,7 +135,6 @@ GameObject:
   - component: {fileID: 52089695}
   - component: {fileID: 52089693}
   - component: {fileID: 52089692}
-  - component: {fileID: 52089691}
   - component: {fileID: 52089697}
   - component: {fileID: 52089698}
   m_Layer: 0
@@ -145,33 +144,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &52089691
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 52089690}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8384b08e5cc04e8d9af2d89ad26362c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  localMove: {x: 0, y: 0}
-  moveSpeed: 10
-  cast: {fileID: 1907150068}
-  jumpSpeed: 1
-  sprintSpeed: 0
-  grounded: 0
-  jumpDuration: 0.274
-  cameraControl: {fileID: 0}
-  isMoving: 0
-  movement: {x: 0, y: 0, z: 0}
-  turnRate: 6.08
-  playerAnimator: {fileID: 1549113998}
-  jumpHeight: {x: 0, y: 1, z: 0}
-  gravitySpeed: 32
-  canJump: 0
 --- !u!54 &52089692
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -275,6 +247,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerState: 0
   isMoving: 0
+  canJump: 0
+  isGrounded: 0
   playerMovementSO: {fileID: 11400000, guid: b63304f2845d8446eae8d19357bc636c, type: 2}
   playerAnimator: {fileID: 1549113998}
 --- !u!1 &279371051
