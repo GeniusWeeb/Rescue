@@ -42,20 +42,14 @@ public class Movement : MonoBehaviour
     private void Update()
     {
 
-        HandleAnimation();
+     //   HandleAnimation();
         HandleRotation();
         ApplyGravityIfNotGrounded();
     }
 
     void HandleAnimation()
     {
-        if(isMoving)
-            playerAnimator.SetBool("SetWalk", true);
-        else
-        {
-            playerAnimator.SetBool("SetWalk", false);
-        }
-        
+        playerAnimator.SetBool("SetWalk", isMoving);
     }
 
     private void FixedUpdate()
@@ -64,8 +58,8 @@ public class Movement : MonoBehaviour
         if (canJump) Jump();
     }
 
-    private void HandleRotation()
-    {
+    public void HandleRotation()
+    {   
         if (movement == Vector3.zero) return;
 
         Vector3 tempVec;
@@ -73,26 +67,12 @@ public class Movement : MonoBehaviour
         tempVec.y = 0f;
         tempVec.z = movement.z;
         Quaternion targetRotation = Quaternion.LookRotation(tempVec);
-        
-        this.transform.rotation  = Quaternion.SlerpUnclamped(transform.rotation, targetRotation, turnRate * Time.deltaTime);
-        
-       //  this.transform.rotation = finalRot;
+
+       this.transform.rotation = (Quaternion.SlerpUnclamped(transform.rotation, targetRotation, turnRate * Time.deltaTime));
+
+        //  this.transform.rotation = finalRot;
     }
-
-
-
-
-      
-    public void MovePerFrame(Vector2 tempMove)
-    {
-        localMove = tempMove;
-        isMoving = true;
-        movement = (tempMove.y * this.transform.forward) + (tempMove.x * this.transform.right) ;
-      
-        body.MovePosition(transform.position + movement * (moveSpeed * Time.fixedDeltaTime));
-        
-        // Rotate towards the movement direction
-    }
+    
     
     void ApplyGravityIfNotGrounded()
     {
@@ -153,10 +133,11 @@ public class Movement : MonoBehaviour
 
     public Vector3 SetMovement(Vector3 tempMovement) => movement =  tempMovement;
 
-    public bool GetIsGrounded() => cast.CheckGrounded(); 
+    public bool GetIsGrounded => cast.CheckGrounded(); 
     //this can be moved to the grounded part of a statemachine like idle or whatever
-    public bool SetIsMoving(bool status) => isMoving = status;
+    public void SetIsMoving(bool status) => isMoving = status;
+    public bool GetIsMoving => isMoving;
 
-   
+
 
 }

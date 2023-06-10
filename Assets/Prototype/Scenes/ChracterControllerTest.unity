@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8384b08e5cc04e8d9af2d89ad26362c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  move: {x: 0, y: 0}
+  localMove: {x: 0, y: 0}
   moveSpeed: 10
   cast: {fileID: 1907150068}
   jumpSpeed: 1
@@ -273,6 +273,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 023dc8fe2caea4bd0bf0f5e2f930fe63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerState: 0
+  isMoving: 0
+  playerMovementSO: {fileID: 11400000, guid: b63304f2845d8446eae8d19357bc636c, type: 2}
+  playerAnimator: {fileID: 1549113998}
 --- !u!1 &279371051
 GameObject:
   m_ObjectHideFlags: 0

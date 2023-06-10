@@ -6,10 +6,9 @@ using UnityEngine.InputSystem;
 
 namespace  Rescue.InputManagers
 {
-
-
     public class InputManager : MonoBehaviour
     {
+        public static InputManager Instance;
         
         private GameControls controls;
         private PlayerManager player;
@@ -34,24 +33,14 @@ namespace  Rescue.InputManagers
 
         private void Awake()
         {
+            Instance = this;
             controls = new GameControls();
             player = PlayerManager.Instance;
             //Subscribe to the diff actions from the input class
 
         }
 
-        private void FixedUpdate()
-        {
-            Vector2 move = controls.Player.Movement.ReadValue<Vector2>();
-            if (move == Vector2.zero || move.y == -1 || !player.GetMovement().GetIsGrounded())
-            {
-                player.GetMovement().SetIsMoving(false);
-                return;
-            }
-
-            player.GetMovement().MovePerFrame(move);
-
-        }
+    
 
         private void SprintPerforming(InputAction.CallbackContext context)
         {
@@ -62,6 +51,9 @@ namespace  Rescue.InputManagers
         {
             player.GetMovement().PerformJump(context);
         }
+
+        public GameControls GetControls() => controls;
+        public PlayerManager GetPlayer() => player;
 
     }
 
