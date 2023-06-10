@@ -2,6 +2,7 @@
 using Rescue.InputManagers;
 using UnityEngine;
 using UnityEngine.Animations;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 namespace Rescue.CharacterFSM
@@ -14,13 +15,14 @@ namespace Rescue.CharacterFSM
         {
             PlayerManager.Instance.SetPlayerState(thisState);
             PlayerManager.Instance.SetPlayerIsMoving(false);
-            Debug.LogError("Entering Idle state");
+     
 
         }
         public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             Rigidbody body = GetRCController(animator);
             InputManager.Instance.CheckAndUpdateInput();
+        
 
         }
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

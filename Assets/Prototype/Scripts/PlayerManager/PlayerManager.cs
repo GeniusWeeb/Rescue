@@ -21,6 +21,7 @@ public class PlayerManager : MonoBehaviour
 
     private Vector2 playerMovementWorldToScreen;
     private Rigidbody playerBody;
+    private Vector3 internalMovement, movement; //similar to 22  
     
     //use this to get ref
     public static PlayerManager Instance { get; private set; }
@@ -45,6 +46,7 @@ public class PlayerManager : MonoBehaviour
              private void Update()
              {
                 playerAnimator.SetBool("SetWalk", isMoving);
+                HandleRotation();
              }
 
              private void FixedUpdate()
@@ -61,8 +63,26 @@ public class PlayerManager : MonoBehaviour
 
      private void PlayerMove()
      {
-         Vector3 movement = (playerMovementWorldToScreen.y * this.transform.forward) + (playerMovementWorldToScreen.x * this.transform.right);
+          movement = (playerMovementWorldToScreen.y * this.transform.forward) + (playerMovementWorldToScreen.x * this.transform.right);
          playerBody.MovePosition(transform.position + movement * (playerMovementSO.moveSpeed * Time.fixedDeltaTime));
+       
      }
+     public void HandleRotation()
+     {      
+        
+         if (movement == Vector3.zero) return;
+
+         Vector3 tempVec;
+         tempVec.x = movement.x;
+         tempVec.y = 0f;
+         tempVec.z = movement.z;
+         Quaternion targetRotation = Quaternion.LookRotation(tempVec);
+        
+         if(isMoving)
+          this.transform.rotation = (Quaternion.SlerpUnclamped(transform.rotation, targetRotation, playerMovementSO.turnRate * Time.deltaTime));}
+
+         //  this.transform.rotation = finalRot;
+    
+
 
 }

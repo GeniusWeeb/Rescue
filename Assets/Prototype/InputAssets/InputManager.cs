@@ -50,6 +50,7 @@ namespace  Rescue.InputManagers
                 return;
             }
             PlayerManager.Instance.SetPlayerIsMoving(true);
+            PlayerManager.Instance.SetPlayerTempMovement(move);
             
         }
 

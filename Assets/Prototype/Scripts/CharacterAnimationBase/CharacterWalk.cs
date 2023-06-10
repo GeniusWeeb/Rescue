@@ -25,6 +25,7 @@ namespace Rescue.CharacterFSM
         {
          
             InputManager.Instance.CheckAndUpdateInput();
+           
 
 
         }

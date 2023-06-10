@@ -43,7 +43,7 @@ public class Movement : MonoBehaviour
     {
 
      //   HandleAnimation();
-        HandleRotation();
+       // HandleRotation();
         ApplyGravityIfNotGrounded();
     }
 
@@ -58,20 +58,20 @@ public class Movement : MonoBehaviour
         if (canJump) Jump();
     }
 
-    public void HandleRotation()
-    {   
-        if (movement == Vector3.zero) return;
-
-        Vector3 tempVec;
-        tempVec.x = movement.x;
-        tempVec.y = 0f;
-        tempVec.z = movement.z;
-        Quaternion targetRotation = Quaternion.LookRotation(tempVec);
-
-       this.transform.rotation = (Quaternion.SlerpUnclamped(transform.rotation, targetRotation, turnRate * Time.deltaTime));
-
-        //  this.transform.rotation = finalRot;
-    }
+    // public void HandleRotation()
+    // {   
+    //     if (movement == Vector3.zero) return;
+    //
+    //     Vector3 tempVec;
+    //     tempVec.x = movement.x;
+    //     tempVec.y = 0f;
+    //     tempVec.z = movement.z;
+    //     Quaternion targetRotation = Quaternion.LookRotation(tempVec);
+    //
+    //    this.transform.rotation = (Quaternion.SlerpUnclamped(transform.rotation, targetRotation, turnRate * Time.deltaTime));
+    //
+    //     //  this.transform.rotation = finalRot;
+    // }
     
     
     void ApplyGravityIfNotGrounded()
