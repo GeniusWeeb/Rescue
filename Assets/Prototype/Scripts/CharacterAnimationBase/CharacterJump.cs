@@ -32,7 +32,7 @@ namespace  Rescue.CharacterFSM
         {   
             
             PlayerManager.Instance.SetPlayerSecondaryState(PlayerManager.Instance.CheckIfPlayerGrounded ? CharacterSecondaryState.Grounded : CharacterSecondaryState.AirBound);
-            PlayerManager.Instance.SetJumpStatus(false);
+           
 
         }
 

@@ -26,7 +26,6 @@ public class GroundCheckerCast : MonoBehaviour
      if (detect)
      {
          isGrounded = true;
-         PlayerManager.Instance.SetPlayerSecondaryState(CharacterSecondaryState.Grounded);
      }
      else
      {
