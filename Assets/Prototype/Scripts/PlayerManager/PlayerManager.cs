@@ -89,8 +89,6 @@ public class PlayerManager : MonoBehaviour
                    (playerMovementWorldToScreen.x * this.transform.right);
         playerController.Move(movement * (playerMovementSO.moveSpeed * playerMovementSO.sprintSpeed *
                                           Time.fixedDeltaTime));
-                                         
-
     }
 
     private void CheckGravity()
