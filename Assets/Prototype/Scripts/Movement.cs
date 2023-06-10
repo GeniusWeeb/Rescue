@@ -67,7 +67,12 @@ public class Movement : MonoBehaviour
     private void HandleRotation()
     {
         if (movement == Vector3.zero) return;
-        Quaternion targetRotation = Quaternion.LookRotation(movement, Vector3.up);
+
+        Vector3 tempVec;
+        tempVec.x = movement.x;
+        tempVec.y = 0f;
+        tempVec.z = movement.z;
+        Quaternion targetRotation = Quaternion.LookRotation(tempVec);
         
         this.transform.rotation  = Quaternion.SlerpUnclamped(transform.rotation, targetRotation, turnRate * Time.deltaTime);
         
