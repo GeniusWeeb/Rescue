@@ -20,27 +20,16 @@ namespace Rescue.CharacterFSM
         public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             Rigidbody body = GetRCController(animator);
-            CheckAndUpdateInput();
+            InputManager.Instance.CheckAndUpdateInput();
+
         }
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             
         }
 
-        void CheckAndUpdateInput()
-        { 
-         
-            Vector2 move = InputManager.Instance.GetControls().Player.Movement.ReadValue<Vector2>();
-           
-            if (move == Vector2.zero || move.y == -1 || !PlayerManager.Instance.GetMovement().GetIsGrounded)
-            {
-                PlayerManager.Instance.SetPlayerIsMoving(false);
-                return;
-            }
-            PlayerManager.Instance.SetPlayerIsMoving(true);
-         
-            
-        }
+      
+
     }
 
 }

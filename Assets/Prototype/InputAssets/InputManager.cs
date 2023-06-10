@@ -40,7 +40,18 @@ namespace  Rescue.InputManagers
 
         }
 
-    
+         public  void CheckAndUpdateInput()
+        {
+            Vector2 move = GetControls().Player.Movement.ReadValue<Vector2>();
+           
+            if (move == Vector2.zero || move.y == -1 || !PlayerManager.Instance.GetMovement().GetIsGrounded)
+            {
+                PlayerManager.Instance.SetPlayerIsMoving(false);
+                return;
+            }
+            PlayerManager.Instance.SetPlayerIsMoving(true);
+            
+        }
 
         private void SprintPerforming(InputAction.CallbackContext context)
         {
@@ -52,7 +63,7 @@ namespace  Rescue.InputManagers
             player.GetMovement().PerformJump(context);
         }
 
-        public GameControls GetControls() => controls;
+        private GameControls GetControls() => controls;
         public PlayerManager GetPlayer() => player;
 
     }
