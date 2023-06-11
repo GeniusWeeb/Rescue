@@ -111,17 +111,22 @@ public class PlayerManager : MonoBehaviour
     private void CheckGravity(){
      
         if(cast.CheckGrounded()){
-                 
-        verticalVelocity =  startJumpPhase ? jumpForce : -gravity * Time.fixedDeltaTime ;
+            
+           playerAnimator.SetBool("SetIdle",true);
+           playerAnimator.SetFloat("SetFallStart" , 0.1f);
+            
+            verticalVelocity =  startJumpPhase ? jumpForce : -gravity * Time.fixedDeltaTime ;
 
             }
         else 
         {
 
-            verticalVelocity -= gravity * Time.deltaTime ; // gravity added while in air
+            verticalVelocity -= gravity * Time.deltaTime ;        
+            playerAnimator.SetFloat("SetFallStart" , verticalVelocity);
+            // gravity added while in air
         }
         
-       // verticalVelocity = Mathf.Clamp(  verticalVelocity,0 ,10000);
+       
         
         playerController.Move(  new Vector3 (0f ,verticalVelocity ,0f)* Time.fixedDeltaTime);
 
