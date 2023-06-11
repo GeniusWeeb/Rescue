@@ -59,7 +59,7 @@ public class PlayerManager : MonoBehaviour
     private void Update()
     {   
         
-        CheckGravity();
+      
         isGrounded = cast.CheckGrounded();
         playerAnimator.SetBool("SetWalk", isMoving);
         HandleRotation();
@@ -69,7 +69,7 @@ public class PlayerManager : MonoBehaviour
     private void FixedUpdate()
     {
 
-      
+        CheckGravity();
         if (isMoving)
             PlayerMove();
        
@@ -112,9 +112,8 @@ public class PlayerManager : MonoBehaviour
      
         if(cast.CheckGrounded()){
                  
-        verticalVelocity =  startJumpPhase ? jumpForce : -gravity * Time.deltaTime ;
-           
-         // small constant gravity added 
+        verticalVelocity =  startJumpPhase ? jumpForce : -gravity * Time.fixedDeltaTime ;
+
             }
         else 
         {
@@ -124,7 +123,7 @@ public class PlayerManager : MonoBehaviour
         
        // verticalVelocity = Mathf.Clamp(  verticalVelocity,0 ,10000);
         
-        playerController.Move(  new Vector3 (0f ,verticalVelocity ,0f)* Time.deltaTime);
+        playerController.Move(  new Vector3 (0f ,verticalVelocity ,0f)* Time.fixedDeltaTime);
 
 
 
