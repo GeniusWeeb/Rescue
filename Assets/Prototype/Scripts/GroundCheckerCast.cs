@@ -21,7 +21,7 @@ public class GroundCheckerCast : MonoBehaviour
 
     private void Update()
     {
-     detect =    Physics.BoxCast(this.transform.position, this.transform.localScale/2,
+     detect =    Physics.BoxCast(this.transform.parent.position, this.transform.parent.localScale/2,
          -transform.up,  out hit, transform.rotation , maxDistance     ,layerGround);
      if (detect)
      {
@@ -41,13 +41,13 @@ public class GroundCheckerCast : MonoBehaviour
     {
         Gizmos.color = Color.red;  
         Gizmos.DrawRay(this.transform.position,-transform.up );
-        Gizmos.DrawWireCube(this.transform.position , this.transform.localScale/2);
+        Gizmos.DrawWireCube(this.transform.parent.position * maxDistance , this.transform .parent.localScale/2);
      
          
         if (detect)
         {
             Gizmos.color = Color.green;
-            Gizmos.DrawWireCube( this.transform.position , this.transform.localScale/2);
+            Gizmos.DrawWireCube( this.transform.parent.position * maxDistance , this.transform.parent.localScale/2);
         }
     }
 }

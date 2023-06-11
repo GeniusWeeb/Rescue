@@ -14,6 +14,7 @@ public class PlayerManager : MonoBehaviour
         playerSecondaryState;
 
     [Header("Is Player moving")] [SerializeField]
+
     private bool isMoving;
 
     [Header("Jumping")][SerializeField] private bool canJump;
@@ -39,7 +40,11 @@ public class PlayerManager : MonoBehaviour
     //use this to get ref
     public static PlayerManager Instance { get; private set; }
 
+
+
+#region UnityMethods
     private void Awake()
+    
     {
         Instance = this;
       
@@ -47,6 +52,33 @@ public class PlayerManager : MonoBehaviour
         cast = GetComponentInChildren<GroundCheckerCast>();
 
     }
+
+
+    private bool canStartJump ; 
+    
+    private void Update()
+    {   
+        
+        CheckGravity();
+        isGrounded = cast.CheckGrounded();
+        playerAnimator.SetBool("SetWalk", isMoving);
+        HandleRotation();
+        
+    }
+
+    private void FixedUpdate()
+    {
+
+      
+        if (isMoving)
+            PlayerMove();
+       
+
+    }
+
+
+
+#endregion
     
     public PlayerSO GetPlayerDataSO => playerMovementSO;
     public bool CheckIfPlayerGrounded => isGrounded;
@@ -59,29 +91,7 @@ public class PlayerManager : MonoBehaviour
     public void SetJumpStatus(bool status) => canJump = status;
     
 
-    #region Update and Fixed Update for player movement
-
-    private void Update()
-    {  
-        isGrounded = cast.CheckGrounded();
-        playerAnimator.SetBool("SetWalk", isMoving);
-        HandleRotation();
-    }
-
-    private void FixedUpdate()
-    {
-
-        CheckGravity();
-        if (isMoving)
-            PlayerMove();
-        if (canJump)  //Check for grounded too
-            PlayerPerformJump();
-
-    }
-
-    #endregion
-
-
+ 
 
     private void PlayerMove()
     {
@@ -91,17 +101,38 @@ public class PlayerManager : MonoBehaviour
                                           Time.fixedDeltaTime));
     }
 
-    private void CheckGravity()
-    {
-        if (!cast.CheckGrounded())
-        {
-            playerController.Move(Vector3.down * (playerMovementSO.fallDownSpeed * Time.deltaTime));
-        }
 
-    }
+  [SerializeField]  private float gravity;
+    [SerializeField]private float verticalVelocity ;   // this is  the main driving force for the jump
+    [SerializeField]private float jumpForce ;
+
+   [SerializeField] private bool startJumpPhase ;
+    
+    private void CheckGravity(){
+     
+        if(cast.CheckGrounded()){
+                 
+        verticalVelocity =  startJumpPhase ? jumpForce : -gravity * Time.deltaTime ;
+           
+         // small constant gravity added 
+            }
+        else 
+        {
+
+            verticalVelocity -= gravity * Time.deltaTime ; // gravity added while in air
+        }
+        
+       // verticalVelocity = Mathf.Clamp(  verticalVelocity,0 ,10000);
+        
+        playerController.Move(  new Vector3 (0f ,verticalVelocity ,0f)* Time.deltaTime);
+
+
+
+        }
 
     private void HandleRotation()
     {
+        
         if (movement == Vector3.zero) return;
         Vector3 tempVec;
         tempVec.x = movement.x;
@@ -112,9 +143,8 @@ public class PlayerManager : MonoBehaviour
         if (isMoving)
             this.transform.rotation = (Quaternion.SlerpUnclamped(transform.rotation, targetRotation,
                 playerMovementSO.turnRate * Time.deltaTime));
+                
     }
-
-
 
     #region Sprint and jump
 
@@ -127,6 +157,8 @@ public class PlayerManager : MonoBehaviour
                     else if (context.canceled)
                     {
                         playerAnimator.SetBool("SetRun", false);
+                    
+                        
 
                     }
 
@@ -138,29 +170,24 @@ public class PlayerManager : MonoBehaviour
                     {
                         //  body.isKinematic = false;
                         playerAnimator.SetBool("SetJump", true);
-                        canJump = true;
+                       startJumpPhase = true ;
+                        Debug.Log(verticalVelocity);
 
                     }
 
                     else if (context.canceled)
-                    {
+                    {   
+                       startJumpPhase = false ;
                         playerAnimator.SetBool("SetJump", false);
-                        StartCoroutine(delay());
+                      
                     }
                 }
 
               
                 //Main Jump perform here
-              private  void PlayerPerformJump()
-              {
-                  playerController.Move(new Vector3(0, 0.5f, 0) * (playerMovementSO.jumpSpeed * Time.deltaTime));
-              }
+            
 
-                IEnumerator delay()
-                {   
-                    yield return new WaitForSeconds(playerMovementSO.jumpSpeed);
-                    canJump = false;
-                }
+               
     #endregion
 }
 
