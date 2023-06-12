@@ -181,12 +181,21 @@ public class PlayerManager : MonoBehaviour
 
                     else if (context.canceled)
                     {   
-                       startJumpPhase = false ;
-                        Debug.Log("Jump is canceled");
+                    
+                       StartCoroutine(JumpDelay());
+                   
                       
                     }
                 }
 
+
+                private IEnumerator JumpDelay()
+                {
+                 yield return new WaitForSeconds(1.5f);
+                 startJumpPhase = false ;
+                 playerAnimator.SetBool("SetJump",false);
+                 Debug.Log("Jump is canceled");
+                }
               
                 //Main Jump perform here
             
