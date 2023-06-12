@@ -30,12 +30,15 @@ public class GroundCheckerCast : MonoBehaviour
         
      detect =    Physics.BoxCast(this.transform.position, castSize/2,
          Vector3.down,  out hit, transform.rotation ,maxDistance,layerGround);
-     if (detect ||  playerController.isGrounded)
-     {
+     if ( detect)
+     {   
          isGrounded = true;
+        
      }
      else
      {
+        
+        Debug.Log("Not Grounded");
          isGrounded = false;    
      }
     }

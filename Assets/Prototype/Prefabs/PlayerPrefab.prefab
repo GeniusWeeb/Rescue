@@ -359,9 +359,9 @@ MonoBehaviour:
   layerGround:
     serializedVersion: 2
     m_Bits: 64
-  maxDistance: 0.02
+  maxDistance: 1.5
   isGrounded: 0
-  castSize: {x: 0.6, y: 0.01, z: 0.6}
+  castSize: {x: 1, y: 0.5, z: 1}
 --- !u!1001 &4316440899215018127
 PrefabInstance:
   m_ObjectHideFlags: 0
