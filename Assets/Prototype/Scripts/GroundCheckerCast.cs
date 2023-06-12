@@ -16,11 +16,12 @@ public class GroundCheckerCast : MonoBehaviour
 
     [SerializeField] private bool isGrounded;
     [SerializeField]private Vector3 castSize ; 
+    private CharacterController playerController ;
     
     private void Awake()
     {
       
-       
+      playerController = GetComponentInParent<CharacterController>(); 
        
     }
 
@@ -29,7 +30,7 @@ public class GroundCheckerCast : MonoBehaviour
         
      detect =    Physics.BoxCast(this.transform.position, castSize/2,
          Vector3.down,  out hit, transform.rotation ,maxDistance,layerGround);
-     if (detect)
+     if (detect ||  playerController.isGrounded)
      {
          isGrounded = true;
      }
