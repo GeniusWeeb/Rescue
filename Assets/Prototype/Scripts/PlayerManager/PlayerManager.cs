@@ -175,14 +175,14 @@ public class PlayerManager : MonoBehaviour
                         //  body.isKinematic = false;
                         playerAnimator.SetBool("SetJump", true);
                        startJumpPhase = true ;
-                        Debug.Log(verticalVelocity);
+                      
 
                     }
 
                     else if (context.canceled)
                     {   
                        startJumpPhase = false ;
-                        playerAnimator.SetBool("SetJump", false);
+                        Debug.Log("Jump is canceled");
                       
                     }
                 }

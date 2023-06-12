@@ -16,6 +16,7 @@ namespace Rescue.CharacterFSM
             
             PlayerManager.Instance.SetPlayerState(thisState);
             PlayerManager.Instance.SetPlayerIsMoving(false);
+           
      
 
         }

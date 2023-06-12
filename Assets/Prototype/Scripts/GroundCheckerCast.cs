@@ -19,13 +19,14 @@ public class GroundCheckerCast : MonoBehaviour
     
     private void Awake()
     {
-       //  collider = this.GetComponent<Collider>();
+      
        
        
     }
 
     private void FixedUpdate()
     {
+        
      detect =    Physics.BoxCast(this.transform.position, castSize/2,
          Vector3.down,  out hit, transform.rotation ,maxDistance,layerGround);
      if (detect)
