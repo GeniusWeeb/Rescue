@@ -114,9 +114,7 @@ public class PlayerManager : MonoBehaviour
         if(cast.CheckGrounded()){
             
            playerAnimator.SetBool("SetIdle",true);
-          
-            
-            verticalVelocity =  startJumpPhase ? jumpForce : -gravity * Time.fixedDeltaTime ;
+           verticalVelocity =  startJumpPhase ? jumpForce : -gravity * Time.deltaTime ;
 
             }
         else 
@@ -125,11 +123,8 @@ public class PlayerManager : MonoBehaviour
             verticalVelocity -= gravity * Time.deltaTime ;        
             playerAnimator.SetFloat("SetFallStart" , verticalVelocity);
             // gravity added while in air
-        }
-        
-       
-        
-        playerController.Move(  new Vector3 (0f ,verticalVelocity ,0f)* Time.fixedDeltaTime);
+        }      
+        playerController.Move(  new Vector3 (0f ,verticalVelocity ,0f)* Time.deltaTime);
 
 
 
