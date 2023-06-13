@@ -59,7 +59,7 @@ public class PlayerManager : MonoBehaviour
     private void Update()
     {   
         
-      
+        CheckGravity();
         isGrounded = cast.CheckGrounded();
         playerAnimator.SetBool("SetWalk", isMoving);
         HandleRotation();
@@ -69,7 +69,7 @@ public class PlayerManager : MonoBehaviour
     private void FixedUpdate()
     {
 
-        CheckGravity();
+      
         if (isMoving)
             PlayerMove();
        

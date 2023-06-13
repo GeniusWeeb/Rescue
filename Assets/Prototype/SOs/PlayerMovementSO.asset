@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50a581f000d124aae9fd0b2d5c9d1ce4, type: 3}
   m_Name: PlayerMovementSO
   m_EditorClassIdentifier: 
-  moveSpeed: 1.8
+  moveSpeed: 4.9
   fallDownSpeed: 2.2
   turnRate: 3.6
   jumpHeight: {x: 0, y: 10, z: 0}

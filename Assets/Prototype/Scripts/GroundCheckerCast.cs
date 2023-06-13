@@ -50,15 +50,20 @@ public class GroundCheckerCast : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;  
-        Gizmos.DrawRay(this.transform.position ,Vector3.down * maxDistance );
-        Gizmos.DrawWireCube(this.transform.position ,castSize);
+        Gizmos.DrawRay(this.transform.position ,Vector3.down * 2f);
+        Gizmos.DrawWireCube(this.transform.position ,castSize/2);
+         Gizmos.DrawWireCube(this.transform.position + new Vector3(0,-1,0) ,castSize/2);
+           Gizmos.DrawWireCube(this.transform.position + new Vector3(0,-1.5f,0) ,castSize/2);
+          
      
          
         if (detect)
         {
             Gizmos.color = Color.green;
             Gizmos.DrawWireCube( this.transform.position,castSize/2);
+            Gizmos.DrawWireCube(this.transform.position + new Vector3(0,-1,0) ,castSize/2);
+           Gizmos.DrawWireCube(this.transform.position + new Vector3(0,-1.5f,0) ,castSize/2);
             Gizmos.DrawRay(this.transform.position,Vector3.down * maxDistance );
         }
-    }
+}
 }

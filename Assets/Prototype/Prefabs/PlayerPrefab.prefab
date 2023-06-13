@@ -37,7 +37,7 @@ Transform:
   - {fileID: 3084101049469717390}
   - {fileID: 4354327032450035556}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1949793699782523800
 MeshFilter:
@@ -66,7 +66,7 @@ MonoBehaviour:
   isGrounded: 0
   playerMovementSO: {fileID: 11400000, guid: b63304f2845d8446eae8d19357bc636c, type: 2}
   playerAnimator: {fileID: 7677935365691110686}
-  gravity: 1.5
+  gravity: 2
   verticalVelocity: 0
   jumpForce: 1
   startJumpPhase: 0
@@ -102,13 +102,13 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 1.6
-  m_Radius: 0.5
+  m_Height: 1.78
+  m_Radius: 0.3
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
+  m_StepOffset: 0.2
+  m_SkinWidth: 0.05
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: -0.15, z: 0}
+  m_Center: {x: 0, y: -0.45, z: 0}
 --- !u!1 &3482751128734105121
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,7 +337,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8865130102792405199}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.02, z: 0}
+  m_LocalPosition: {x: 0, y: 0.49, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -359,9 +359,9 @@ MonoBehaviour:
   layerGround:
     serializedVersion: 2
     m_Bits: 64
-  maxDistance: 1.5
+  maxDistance: 1.82
   isGrounded: 0
-  castSize: {x: 1, y: 0.5, z: 1}
+  castSize: {x: 0.5, y: 0.2, z: 0.5}
 --- !u!1001 &4316440899215018127
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -383,7 +383,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 3658b4a4f3af340839d1c8cc276f0813,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.023
+      value: -1.402
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3658b4a4f3af340839d1c8cc276f0813,
         type: 3}
