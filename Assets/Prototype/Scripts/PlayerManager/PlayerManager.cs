@@ -109,11 +109,12 @@ public class PlayerManager : MonoBehaviour
    [SerializeField] private bool startJumpPhase ;
     
     private void CheckGravity(){
-     
+        
+        playerAnimator.SetFloat("SetFallStart" , verticalVelocity);
         if(cast.CheckGrounded()){
             
            playerAnimator.SetBool("SetIdle",true);
-           playerAnimator.SetFloat("SetFallStart" , 0.1f);
+          
             
             verticalVelocity =  startJumpPhase ? jumpForce : -gravity * Time.fixedDeltaTime ;
 
